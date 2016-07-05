@@ -908,7 +908,7 @@ c        WRITE (*,*) 'Check some stuff: iter,GAM',iter,GAM
 c------ DB 040306
 c	WRITE (*,*) 'Exit flag = ', LEXITFLAG
 	IF (LEXITFLAG) THEN
-		WRITE(*,*) 'LEXITFLAG TRUE, GOING TO 90...'
+C		WRITE(*,*) 'LEXITFLAG TRUE, GOING TO 90...'
 		GOTO 90
 c		WRITE(*,*) 'Exiting on account of test...'
 c		STOP

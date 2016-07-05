@@ -26,7 +26,7 @@ import os, sys, string, copy, pdb, time
 # External Python modules
 # =============================================================================
 
-from numpy import zeros,array
+from numpy import zeros,array, real
 
 # =============================================================================
 # Extension modules
@@ -36,31 +36,69 @@ import pyxlight as xfoil
 import pyxlight_cs as xfoil_cs
 
 class xfoilAnalysis():
-    def __init__(self, airfoil_file, re=1e5,mach=0.0,iter=50):
-        try:
-            f = open(airfoil_file,'r')
-        except:
-            print 'There was an error opening the airfoil file %s'%(airfoil_file)
-            sys.exit(1)
+    def __init__(self, airfoil_file, re=1e5,mach=0.0,iter=50, x=None, y=None):
+
+        if x is None:
+            try:
+                f = open(airfoil_file,'r')
+            except:
+                print 'There was an error opening the airfoil file %s'%(airfoil_file)
+                sys.exit(1)
         # end if
 
+
+        # self.re = re
+        # self.mach = mach
+        # self.iter = iter
+        #
+        # # Read the airfoil file
+        # x = []
+        # y = []
+        # # for line in f:
+        # #     try:
+        # #         x.append(float(string.split(line)[0]))
+        # #         y.append(float(string.split(line)[1]))
+        # #         # x.append(complex(string.split(line)[0]))
+        # #         # y.append(complex(string.split(line)[1]))
+        # #     except:
+        # #         pass
+        # # end if
+        # for i in range(len(airfoil_file[0])):
+        #     x.append(airfoil_file[0][i])
+        #     y.append(airfoil_file[1][i])
+        # self.x = array(x)
+        # self.y = array(y)
+        #
+        # self.setCoordinates(self.x, self.y)
+        # self.setCoordinatesComplex(self.x, self.y)
+
+            # Read the airfoil file
+            x = []
+            y = []
+            for line in f:
+                try:
+                    x.append(float(string.split(line)[0]))
+                    y.append(float(string.split(line)[1]))
+                    # x.append(complex(string.split(line)[0]))
+                    # y.append(complex(string.split(line)[1]))
+                except:
+                    pass
+            f.close()
+            print "File"
         self.re = re
         self.mach = mach
         self.iter = iter
 
-        # Read the airfoil file
-        x = []
-        y = []
-        for line in f:
-            x.append(float(string.split(line)[0]))
-            y.append(float(string.split(line)[1]))
         # end if
+        # for i in range(len(airfoil_file[0])):
+        #     x.append(airfoil_file[0][i])
+        #     y.append(airfoil_file[1][i])
         self.x = array(x)
         self.y = array(y)
 
-        self.setCoordinates(self.x,self.y)
-        self.setCoordinatesComplex(self.x,self.y)
-        
+        self.setCoordinates(real(self.x), real(self.y))
+        self.setCoordinatesComplex(self.x, self.y)
+
         return
 
     def setCoordinates(self,x,y):
@@ -70,8 +108,8 @@ class xfoilAnalysis():
                 # FIXED length of 572. Simply set the coordinates up
                 # to NB and leave the remainder as zeros
         NB = len(x)
-        x_input = zeros(N)
-        y_input = zeros(N)
+        x_input = zeros(N) #, dtype=complex)
+        y_input = zeros(N) #, dtype=complex)
         x_input[:NB] = array(x).copy()
         y_input[:NB] = array(y).copy()
         xfoil.ci04.nb = NB       

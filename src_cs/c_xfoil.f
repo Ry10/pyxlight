@@ -1348,8 +1348,8 @@ C---- check for doubled point (sharp corner) at LE
       DO I = 1, NB-1
         IF((SBLE.ceq.SB(I)) .AND. (SBLE.ceq.SB(I+1))) THEN
          IBLE = I
-C----         WRITE(*,*)
-C----         WRITE(*,*) 'Sharp leading edge'
+C         WRITE(*,*)
+C         WRITE(*,*) 'Sharp leading edge'
          GO TO 21
         ENDIF
       ENDDO

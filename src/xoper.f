@@ -874,12 +874,12 @@ c        WRITE (*,*) 'Calling SETBL...'
 
 c------ DB 040306
 c	WRITE (*,*) 'Exit flag = ', LEXITFLAG
-c	IF (LEXITFLAG) THEN
-c		WRITE(*,*) 'LEXITFLAG TRUE, GOING TO 90...'
-c		GOTO 90
+	IF (LEXITFLAG) THEN
+		WRITE(*,*) 'LEXITFLAG TRUE, GOING TO 90...'
+		GOTO 90
 c		WRITE(*,*) 'Exiting on account of test...'
 c		STOP
-c	ENDIF
+	ENDIF
 
 C
 C------ solve Newton system with custom solver

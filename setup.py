@@ -12,10 +12,10 @@ return_code = proc.wait()
 
 setup(
     name='pyXLIGHT.py',
-    version='0.2.0',
+    version='0.1.0',
     description='Python version of XFOIL for airfoils',
-    author='MDOLAB',
-    author_email='mdolab.edu',
+    author='Gaetan Kenway',
+    author_email='mdolab.engin.umich.edu',
     package_dir={'': 'python'},
     py_modules=['pyXLIGHT'],
     license='Apache License, Version 2.0',
